@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-style-type" content="text/css">
+    <meta http-equiv="content-script-type" content="text/javascript">
+    <link type="text/css" href="../css/common.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".searchTitle").click(function (e) {
+                var next = $(this).next();
+                if (next.css("display") == "none") {
+                    $(this).removeClass("closed");
+                }
+                else {
+                    $(this).addClass("closed");
+                }
+                next.toggle();
+            });
+
+            {
+                var text = "";
+                var dtc1 = "";
+                var dtc2 = "";
+                var prms = getParams();
+                if (prms["text"]) {
+                    text = prms["text"];
+                }
+                if (prms["dtc1"]) {
+                    dtc1 = prms["dtc1"];
+                }
+                if (prms["dtc2"]) {
+                    dtc2 = prms["dtc2"];
+                }
+
+                if (text.length > 0 || dtc1.length > 0 || dtc2.length > 0) {
+                    if (text.length > 0) {
+                        $(".searchText").show();
+                        $(".searchTextValue").text(text);
+                    }
+                    setTimeout(function () {
+                        var noResults = true;
+                        text = text.toString().toLowerCase();
+                        var hoge = false;
+                        $("th").each(function (i, e) {
+                            var hits = false;
+                            if (text.length > 0) {
+                                var t = $(e).text().toString().toLowerCase();
+                                if (t.indexOf(text) !== -1) {
+                                    $(e).next().find(".searchSie").show();
+                                    hits = true;
+                                } else {
+                                    $(e).next().find(".searchSie").each(function (ii, ee) {
+                                        var tt = $(ee).text().toString().toLowerCase();
+                                        if (tt.indexOf(text) !== -1) {
+                                            $(ee).show();
+                                            hits = true;
+                                        }
+                                    });
+                                }
+                            }
+                            if (hits) {
+                                noResults = false;
+                                $(e).parents(".searchChapter, .searchSection, table").show();
+                            }
+                        });
+                        $(".loaderWrap").hide();
+                        if (noResults) {
+                            $(".noResultText").show();
+                        }
+                    }, 100);
+                }
+                else {
+                    $(".loaderWrap").hide();
+                    $(".noResultText").show();
+                }
+            }
+        });
+    </script>
+    <style type="text/css">
+        html, body {
+            background-color: #fafafa;
+        }
+    </style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="../../../mobile.css">
+<script defer src="../../../mobile.js"></script>
+</head>
+<body class="searchBody moca">
+    <div class="searchCondition">
+        <div class="searchTitleLabel">搜尋結果</div>
+        <div class="searchText">
+            <span class="searchTextLabel">文字：</span>
+            <span class="searchTextValue"></span>
+        </div>
+        <div class="searchDTC">
+            <span class="searchDTCLabel">%searchDTCLabel%</span>
+            <span class="searchDTCValue"></span>
+        </div>
+    </div>
+    <div class="loaderWrap"><div class="loader"> </div></div>
+    <div class="searchOutline">
+        <div class="searchOutline"><div class="searchChapter"><div class="searchTitle"><div class="searchTitleText">一般</div></div><div class="searchContent"><table class="searchTopics"><tr><th></th><td><ul><li id="N803020010000400ENG" class="searchSie"><a href="../html/N803020010000400ENG.html" target="content">如何使用本手冊</a></li></ul></td></tr></table><table class="searchTopics"><tr><th>服務前預防措施/注意事項</th><td><ul><li id="N803020030000200ENG" class="searchSie"><a href="../html/N803020030000200ENG.html" target="content">保護車輛</a></li><li id="N803020040000200ENG" class="searchSie"><a href="../html/N803020040000200ENG.html" target="content">兩名以上技師分組進行維修作業</a></li><li id="N803020050000400ENG" class="searchSie"><a href="../html/N803020050000400ENG.html" target="content">拆卸與分解</a></li><li id="N803020060000200ENG" class="searchSie"><a href="../html/N803020060000200ENG.html" target="content">特殊工具</a></li><li id="N803020070000200ENG" class="searchSie"><a href="../html/N803020070000200ENG.html" target="content">應更換零件</a></li><li id="N803020080000400ENG" class="searchSie"><a href="../html/N803020080000400ENG.html" target="content">零件</a></li><li id="N803020090000200ENG" class="searchSie"><a href="../html/N803020090000200ENG.html" target="content">管路及其他橡膠零件</a></li><li id="N8030200A0000200ENG" class="searchSie"><a href="../html/N8030200A0000200ENG.html" target="content">潤滑劑</a></li><li id="N8030200B0000200ENG" class="searchSie"><a href="../html/N8030200B0000200ENG.html" target="content">煞車油</a></li><li id="N8030200C0000200ENG" class="searchSie"><a href="../html/N8030200C0000200ENG.html" target="content">電氣系統維修</a></li><li id="N8030200J0001100ENG" class="searchSie"><a href="../html/N8030200J0001100ENG.html" target="content">電瓶端子連接後必要程序</a></li><li id="N8030200D0000200ENG" class="searchSie"><a href="../html/N8030200D0000200ENG.html" target="content">防鏽劑及底盤防護塗層塗佈</a></li><li id="N8030200E0000200ENG" class="searchSie"><a href="../html/N8030200E0000200ENG.html" target="content">檢查前條件</a></li><li id="N8030200F0000200ENG" class="searchSie"><a href="../html/N8030200F0000200ENG.html" target="content">車輛清洗</a></li><li id="N8030200K0000101ENG" class="searchSie"><a href="../html/N8030200K0000101ENG.html" target="content">多功能測試儀 (M.U.T.-III SE) 附屬總成</a></li><li id="N8030200H0000200ENG" class="searchSie"><a href="../html/N8030200H0000200ENG.html" target="content">為防止車輛起火</a></li><li id="N8030200I0000200ENG" class="searchSie"><a href="../html/N8030200I0000200ENG.html" target="content">引擎機油</a></li></ul></td></tr></table></div></div><div class="searchChapter"><div class="searchTitle"><div class="searchTitleText">交車前檢查</div></div><div class="searchContent"><table class="searchTopics"><tr><th></th><td><ul><li id="N804020010000B01ENG" class="searchSie"><a href="../html/N804020010000B01ENG.html" target="content">有關輸入項目的注意事項</a></li></ul></td></tr></table><table class="searchTopics"><tr><th></th><td><ul><li id="N804020020000200ENG" class="searchSie"><a href="../html/N804020020000200ENG.html" target="content">塗裝術語</a></li></ul></td></tr></table><table class="searchTopics"><tr><th>第一步</th><td><ul><li id="N804020040000G01ENG" class="searchSie"><a href="../html/N804020040000G01ENG.html" target="content">暗電流接頭連接</a></li><li id="N804020050000400ENG" class="searchSie"><a href="../html/N804020050000400ENG.html" target="content">運輸模式設定關閉&lt;ECLIPSE CROSS (歐洲規格車輛)&gt;</a></li></ul></td></tr></table><table class="searchTopics"><tr><th>車身</th><td><ul><li id="N804020070000500ENG" class="searchSie"><a href="../html/N804020070000500ENG.html" target="content">包覆膜</a></li><li id="N804020080000400ENG" class="searchSie"><a href="../html/N804020080000400ENG.html" target="content">車輪</a></li><li id="N804020090000400ENG" class="searchSie"><a href="../html/N804020090000400ENG.html" target="content">外部</a></li><li id="N8040200A0000400ENG" class="searchSie"><a href="../html/N8040200A0000400ENG.html" target="content">車門鎖定系統及車門鉸鏈作動</a></li><li id="N8040200B0000400ENG" class="searchSie"><a href="../html/N8040200B0000400ENG.html" target="content">車外後視鏡、車窗及天窗作動</a></li></ul></td></tr></table><table class="searchTopics"><tr><th>引擎室內</th><td><ul><li id="N8040200D0000400ENG" class="searchSie"><a href="../html/N8040200D0000400ENG.html" target="content">引擎機油液位</a></li><li id="N8040200E0000400ENG" class="searchSie"><a href="../html/N8040200E0000400ENG.html" target="content">煞車總泵油液液位</a></li><li id="N8040200F0000400ENG" class="searchSie"><a href="../html/N8040200F0000400ENG.html" target="content">離合器總泵油液液位</a></li><li id="N8040200G0000400ENG" class="searchSie"><a href="../html/N8040200G0000400ENG.html" target="content">清洗液液位</a></li><li id="N8040200H0000400ENG" class="searchSie"><a href="../html/N8040200H0000400ENG.html" target="content">電瓶狀況與連接</a></li><li id="N8040200I0000400ENG" class="searchSie"><a href="../html/N8040200I0000400ENG.html" target="content">動力方向機油液位</a></li><li id="N8040200J0000400ENG" class="searchSie"><a href="../html/N8040200J0000400ENG.html" target="content">電氣配線</a></li></ul></td></tr></table><table class="searchTopics"><tr><th>車輛下方</th><td><ul><li id="N8040200L0000400ENG" class="searchSie"><a href="../html/N8040200L0000400ENG.html" target="content">輪胎及備胎胎壓</a></li><li id="N8040200M0000400ENG" class="searchSie"><a href="../html/N8040200M0000400ENG.html" target="content">懸吊系統</a></li><li id="N8040200N0000400ENG" class="searchSie"><a href="../html/N8040200N0000400ENG.html" target="content">轉向連桿及開尾銷</a></li><li id="N8040200O0000400ENG" class="searchSie"><a href="../html/N8040200O0000400ENG.html" target="content">車身下方</a></li></ul></td></tr></table><table class="searchTopics"><tr><th>路試前</th><td><ul><li id="N8040200Q0000400ENG" class="searchSie"><a href="../html/N8040200Q0000400ENG.html" target="content">座椅調整裝置及椅背閂鎖</a></li><li id="N8040200R0000400ENG" class="searchSie"><a href="../html/N8040200R0000400ENG.html" target="content">檔位開關</a></li><li id="N8040200S0000400ENG" class="searchSie"><a href="../html/N8040200S0000400ENG.html" target="content">怠速控制旋鈕</a></li><li id="N8040200T0000400ENG" class="searchSie"><a href="../html/N8040200T0000400ENG.html" target="content">儀表板控制開關</a></li><li id="N8040200U0000400ENG" class="searchSie"><a href="../html/N8040200U0000400ENG.html" target="content">儀表、量表、警告燈及指示燈</a></li><li id="N8040200V0000400ENG" class="searchSie"><a href="../html/N8040200V0000400ENG.html" target="content">空調、暖氣及除霧系統</a></li><li id="N8040200W0000400ENG" class="searchSie"><a href="../html/N8040200W0000400ENG.html" target="content">雨刷及清洗器</a></li><li id="N8040200X0000400ENG" class="searchSie"><a href="../html/N8040200X0000400ENG.html" target="content">行車煞車及駐車煞車作動</a></li><li id="N8040200Y0000400ENG" class="searchSie"><a href="../html/N8040200Y0000400ENG.html" target="content">離合器作動</a></li><li id="N8040200Z0000400ENG" class="searchSie"><a href="../html/N8040200Z0000400ENG.html" target="content">安全帶、肩帶及捲收器作動</a></li></ul></td></tr></table><table class="searchTopics"><tr><th>路試</th><td><ul><li id="N804020110000A00ENG" class="searchSie"><a href="../html/N804020110000A00ENG.html" target="content">引擎性能及排氣</a></li><li id="N804020120000400ENG" class="searchSie"><a href="../html/N804020120000400ENG.html" target="content">各檔位變速箱作動</a></li><li id="N804020130000400ENG" class="searchSie"><a href="../html/N804020130000400ENG.html" target="content">煞車</a></li><li id="N804020140000400ENG" class="searchSie"><a href="../html/N804020140000400ENG.html" target="content">轉向控制</a></li><li id="N804020150000400ENG" class="searchSie"><a href="../html/N804020150000400ENG.html" target="content">振動及異音</a></li><li id="N8040201M0000201ENG" class="searchSie"><a href="../html/N8040201M0000201ENG.html" target="content">車速限制警告系統啟動&lt;OUTLANDER (GN#W) (歐洲規格車輛)&gt;</a></li><li id="N8040201N0000200ENG" class="searchSie"><a href="../html/N8040201N0000200ENG.html" target="content">車輛 Bootstrap 驗證&lt;OUTLANDER (GN#W) (歐洲規格車輛)&gt;</a></li><li id="N804020160000D00ENG" class="searchSie"><a href="../html/N804020160000D00ENG.html" target="content">電氣設備</a></li></ul></td></tr></table><table class="searchTopics"><tr><th>路試後</th><td><ul><li id="N804020180000D00ENG" class="searchSie"><a href="../html/N804020180000D00ENG.html" target="content">怠速轉速</a></li><li id="N804020190000D00ENG" class="searchSie"><a href="../html/N804020190000D00ENG.html" target="content">點火正時</a></li><li id="N8040201A0000D00ENG" class="searchSie"><a href="../html/N8040201A0000D00ENG.html" target="content">散熱器冷卻液液位</a></li><li id="N8040201B0000D00ENG" class="searchSie"><a href="../html/N8040201B0000D00ENG.html" target="content">位於引擎室內的軟管、油管及連接</a></li><li id="N8040201E0000D00ENG" class="searchSie"><a href="../html/N8040201E0000D00ENG.html" target="content">檢查引擎、變速箱、轉向齒輪箱及差速器是否漏油</a></li><li id="N8040201C0000D00ENG" class="searchSie"><a href="../html/N8040201C0000D00ENG.html" target="content">手排變速箱及分動箱 (4WD) 機油液位</a></li><li id="N8040201D0000D00ENG" class="searchSie"><a href="../html/N8040201D0000D00ENG.html" target="content">自排變速箱油液位</a></li><li id="N8040201F0000D00ENG" class="searchSie"><a href="../html/N8040201F0000D00ENG.html" target="content">前後差速器機油液位</a></li><li id="N8040201G0000D00ENG" class="searchSie"><a href="../html/N8040201G0000D00ENG.html" target="content">位於車輛下方的軟管、油管及連接</a></li></ul></td></tr></table><table class="searchTopics"><tr><th>最後步驟</th><td><ul><li id="N8040201I0000D00ENG" class="searchSie"><a href="../html/N8040201I0000D00ENG.html" target="content">頭燈 瞄準</a></li><li id="N8040201J0000D00ENG" class="searchSie"><a href="../html/N8040201J0000D00ENG.html" target="content">設備</a></li><li id="N8040201K0000E00ENG" class="searchSie"><a href="../html/N8040201K0000E00ENG.html" target="content">外觀及內裝</a></li><li id="N8040201L0000D00ENG" class="searchSie"><a href="../html/N8040201L0000D00ENG.html" target="content">車主說明</a></li></ul></td></tr></table></div></div><div class="searchChapter"><div class="searchTitle"><div class="searchTitleText">定期檢查與保養</div></div><div class="searchContent"><table class="searchTopics"><tr><th>定期檢查與保養時程表</th><td><ul><li id="N802010010001M00ENG" class="searchSie"><a href="../html/N802010010001M00ENG.html" target="content">定期檢查與保養時程表&lt;25 年式&gt;</a></li><li id="N802010010002N00ENG" class="searchSie"><a href="../html/N802010010002N00ENG.html" target="content">定期檢查與保養時程表&lt;26 年式&gt;</a></li></ul></td></tr></table><table class="searchTopics"><tr><th>引擎室內作業</th><td><ul><li id="N802020010000T00ENG" class="searchSie"><span class="unavailable-link" title="此章節未包含於本手冊">檢查驅動皮帶是否有裂紋、磨損、損壞，並調整張力&lt;PR25DD&gt;</span></li><li id="N802020010000S00ENG" class="searchSie"><a href="../html/N802020010000S00ENG.html" target="content">檢查驅動皮帶是否有裂紋、磨損、損壞，並調整張力&lt;4B4&gt;</a></li><li id="N802020250000100ENG" class="searchSie"><a href="../html/N802020250000100ENG.html" target="content">檢查進氣軟管是否損壞</a></li><li id="N802020030000C00ENG" class="searchSie"><span class="unavailable-link" title="此章節未包含於本手冊">更換火花塞&lt;PR25DD&gt;</span></li><li id="N802020030000D00ENG" class="searchSie"><a href="../html/N802020030000D00ENG.html" target="content">更換火花塞&lt;4B4&gt;</a></li><li id="N802020040000G00ENG" class="searchSie"><span class="unavailable-link" title="此章節未包含於本手冊">檢查氣門間隙&lt;PR25DD&gt;</span></li><li id="N802020040000F00ENG" class="searchSie"><a href="../html/N802020040000F00ENG.html" target="content">檢查氣門間隙&lt;4B4&gt;</a></li><li id="N802020050000100ENG" class="searchSie"><a href="../html/N802020050000100ENG.html" target="content">檢查散熱器軟管是否損壞及連接是否正確</a></li><li id="N802020060000600ENG" class="searchSie"><a href="../html/N802020060000600ENG.html" target="content">檢查儲液罐內引擎冷卻液液位</a></li><li id="N802020070000Y00ENG" class="searchSie"><span class="unavailable-link" title="此章節未包含於本手冊">更換引擎冷卻液&lt;PR25DD&gt;</span></li><li id="N802020070000X00ENG" class="searchSie"><a href="../html/N802020070000X00ENG.html" target="content">更換引擎冷卻液&lt;4B4&gt;</a></li><li id="N802020150000400ENG" class="searchSie"><a href="../html/N802020150000400ENG.html" target="content">檢查中冷器冷卻水軟管是否損壞及連接是否正確</a></li><li id="N802020160000500ENG" class="searchSie"><a href="../html/N802020160000500ENG.html" target="content">檢查儲液罐內中冷器冷卻液液位</a></li><li id="N802020170000700ENG" class="searchSie"><a href="../html/N802020170000700ENG.html" target="content">更換中冷器冷卻液</a></li><li id="N802020140000100ENG" class="searchSie"><a href="../html/N802020140000100ENG.html" target="content">清潔空氣濾芯</a></li><li id="N802020090000P00ENG" class="searchSie"><span class="unavailable-link" title="此章節未包含於本手冊">更換空氣濾芯&lt;PR25DD&gt;</span></li><li id="N802020090000O00ENG" class="searchSie"><a href="../html/N802020090000O00ENG.html" target="content">更換空氣濾芯&lt;4B4&gt;</a></li><li id="N802020100000600ENG" class="searchSie"><a href="../html/N802020100000600ENG.html" target="content">檢查煞車及離合器儲液罐液位</a></li><li id="N802020110000500ENG" class="searchSie"><a href="../html/N802020110000500ENG.html" target="content">更換煞車油</a></li><li id="N802020120000100ENG" class="searchSie"><a href="../html/N802020120000100ENG.html" target="content">檢查電瓶狀況</a></li><li id="N802020130000F00ENG" class="searchSie"><a href="../html/N802020130000F00ENG.html" target="content">更換燃油濾清器&lt;4B4&gt;</a></li></ul></td></tr></table><table class="searchTopics"><tr><th>車輛下方作業</th><td><ul><li id="N802030010000100ENG" class="searchSie"><a href="../html/N802030010000100ENG.html" target="content">檢查懸吊系統是否損壞及鬆動</a></li><li id="N802030020000100ENG" class="searchSie"><a href="../html/N802030020000100ENG.html" target="content">檢查懸吊臂球接頭間隙及防塵套是否損壞</a></li><li id="N802030030000700ENG" class="searchSie"><a href="../html/N802030030000700ENG.html" target="content">檢查傳動軸防塵套是否損壞</a></li><li id="N802030040000700ENG" class="searchSie"><a href="../html/N802030040000700ENG.html" target="content">檢查轉向連桿是否損壞及連接是否鬆動</a></li><li id="N802030060000E00ENG" class="searchSie"><a href="../html/N802030060000E00ENG.html" target="content">檢查分動箱是否漏油</a></li><li id="N802030080000H00ENG" class="searchSie"><a href="../html/N802030080000H00ENG.html" target="content">更換分動箱齒輪油</a></li><li id="N802030090000300ENG" class="searchSie"><a href="../html/N802030090000300ENG.html" target="content">檢查後差速器是否漏油</a></li><li id="N802030100000600ENG" class="searchSie"><a href="../html/N802030100000600ENG.html" target="content">更換後差速器齒輪油</a></li><li id="N802030110000C00ENG" class="searchSie"><span class="unavailable-link" title="此章節未包含於本手冊">檢查排氣管連接處是否漏氣，並檢查管路安裝&lt;PR25DD&gt;</span></li><li id="N802030110000B00ENG" class="searchSie"><a href="../html/N802030110000B00ENG.html" target="content">檢查排氣管連接處是否漏氣，並檢查管路安裝&lt;4B4&gt;</a></li></ul></td></tr></table><table class="searchTopics"><tr><th>車內作業</th><td><ul><li id="N802040010000200ENG" class="searchSie"><a href="../html/N802040010000200ENG.html" target="content">檢查煞車踏板及離合器踏板自由行程</a></li><li id="N802040020000100ENG" class="searchSie"><a href="../html/N802040020000100ENG.html" target="content">更換空氣清淨濾芯</a></li></ul></td></tr></table><table class="searchTopics"><tr><th>車輛外部作業</th><td><ul><li id="N802050010000T00ENG" class="searchSie"><a href="../html/N802050010000T00ENG.html" target="content">檢查 車輪定位</a></li><li id="N802050020000800ENG" class="searchSie"><a href="../html/N802050020000800ENG.html" target="content">檢查前後輪軸承間隙</a></li><li id="N802050030000700ENG" class="searchSie"><a href="../html/N802050030000700ENG.html" target="content">檢查煞車軟管及管路是否漏油</a></li><li id="N802050040000700ENG" class="searchSie"><a href="../html/N802050040000700ENG.html" target="content">檢查煞車來令片及碟盤磨損狀況</a></li><li id="N802050050000700ENG" class="searchSie"><a href="../html/N802050050000700ENG.html" target="content">檢查燃油軟管及管路是否漏油或劣化</a></li></ul></td></tr></table><table class="searchTopics"><tr><th>引擎暖機後作業</th><td><ul><li id="N802060010000700ENG" class="searchSie"><a href="../html/N802060010000700ENG.html" target="content">檢查 CVT 是否漏油&lt;F1CJD, W1CJD&gt;</a></li><li id="N802060010000600ENG" class="searchSie"><a href="../html/N802060010000600ENG.html" target="content">檢查 CVT 是否漏油&lt;F1CJE, W1CJE&gt;</a></li><li id="N802060020000800ENG" class="searchSie"><a href="../html/N802060020000800ENG.html" target="content">更換 CVT 變速箱油&lt;F1CJD, W1CJD&gt;</a></li><li id="N802060020000900ENG" class="searchSie"><a href="../html/N802060020000900ENG.html" target="content">更換 CVT 變速箱油&lt;F1CJE, W1CJE&gt;</a></li><li id="N802060030001D00ENG" class="searchSie"><span class="unavailable-link" title="此章節未包含於本手冊">更換引擎機油&lt;PR25DD&gt;</span></li><li id="N802060030001C00ENG" class="searchSie"><a href="../html/N802060030001C00ENG.html" target="content">更換引擎機油&lt;4B4&gt;</a></li><li id="N802060040000S00ENG" class="searchSie"><span class="unavailable-link" title="此章節未包含於本手冊">更換引擎機油濾清器&lt;PR25DD&gt;</span></li><li id="N802060040000R00ENG" class="searchSie"><a href="../html/N802060040000R00ENG.html" target="content">更換引擎機油濾清器&lt;4B4&gt;</a></li><li id="N802060110000100ENG" class="searchSie"><a href="../html/N802060110000100ENG.html" target="content">檢查 CO 濃度 (汽油引擎車輛)&lt;僅限法規要求之國家&gt;</a></li></ul></td></tr></table><table class="searchTopics"><tr><th>其他</th><td><ul><li id="N802070010000100ENG" class="searchSie"><a href="../html/N802070010000100ENG.html" target="content">檢查車身是否損壞</a></li><li id="N802070020000100ENG" class="searchSie"><a href="../html/N802070020000100ENG.html" target="content">路試</a></li></ul></td></tr></table></div></div></div>
+    </div>
+    <div class="noResultText">
+        <div>找不到標題。</div><div>請重新設定搜尋條件。</div>
+    </div>
+</body>
+</html>

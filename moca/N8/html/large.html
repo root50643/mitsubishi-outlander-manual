@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  
+  <title>圖片放大檢視｜三菱服務手冊</title>
+  <style>
+    *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;font-family:system-ui,-apple-system,"Microsoft JhengHei",sans-serif;color:#202429;background:#e8ebee}
+    body{display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
+    .viewer-toolbar{display:flex;flex:0 0 auto;align-items:center;flex-wrap:wrap;gap:6px;padding:8px max(10px,env(safe-area-inset-right)) 8px max(10px,env(safe-area-inset-left));background:#fff;border-bottom:1px solid #cbd0d5;z-index:2}
+    .viewer-toolbar button{display:inline-flex;justify-content:center;align-items:center;min-height:44px;min-width:44px;padding:7px 12px;background:#fff;color:#252a30;border:1px solid #c5cbd1;border-radius:6px;cursor:pointer;font:inherit;font-size:14px}
+    .viewer-toolbar button:hover{background:#eef1f4}.viewer-toolbar button:focus-visible{outline:3px solid #006bb5;outline-offset:2px}.viewer-percent{font-size:13px;min-width:48px;text-align:center;font-variant-numeric:tabular-nums}
+    .viewer-viewport{flex:1 1 0;min-height:0;overflow:auto;overscroll-behavior:contain;touch-action:pan-x pan-y pinch-zoom;-webkit-overflow-scrolling:touch;padding:12px;cursor:grab}
+    .viewer-viewport.is-dragging{cursor:grabbing}.viewer-surface{position:relative;margin:0 auto;background:#fff;box-shadow:0 1px 6px #0002;min-width:0}
+    #ivImage{display:block;position:absolute;top:0;left:0;max-width:none;max-height:none;transform-origin:top left;user-select:none;-webkit-user-select:none;-webkit-user-drag:none}
+    .viewer-status{font-size:13px;margin:12px;line-height:1.6}.viewer-help{font-size:12px;color:#5a626a;padding:5px 12px;background:#f8f9fa;flex:0 0 auto;padding-bottom:max(5px,env(safe-area-inset-bottom))}
+    @media(max-width:767px){.viewer-toolbar{gap:5px;padding-top:6px;padding-bottom:6px}.viewer-toolbar button{font-size:13px;padding-left:9px;padding-right:9px}.viewer-viewport{padding:8px}.viewer-help{font-size:11px}.viewer-percent{min-width:42px}}
+    @media print{html,body{height:auto!important;overflow:visible!important;background:#fff}.viewer-toolbar,.viewer-help,.viewer-status{display:none!important}.viewer-viewport{overflow:visible;padding:0}.viewer-surface{box-shadow:none;margin:0;max-width:100%;page-break-inside:avoid}#ivImage{max-width:none}}
+  </style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="../../../mobile.css">
+<script defer src="../../../mobile.js"></script>
+</head>
+<body class="largeBody moca manual-large-viewer">
+  <div class="viewer-toolbar" role="toolbar" aria-label="圖片縮放工具">
+    <button type="button" id="btnFit">適合寬度</button>
+    <button type="button" id="btnActual">100%</button>
+    <button type="button" id="btnMinus" aria-label="縮小圖片">−</button>
+    <output class="viewer-percent" id="viewer-percent" aria-live="polite">—</output>
+    <button type="button" id="btnPlus" aria-label="放大圖片">＋</button>
+    <button type="button" id="btnRotate" aria-label="順時針旋轉圖片">旋轉</button>
+    <button type="button" id="btnPrint">列印</button>
+  </div>
+  <div class="viewer-viewport" id="ivScroll" tabindex="0" aria-label="圖片，可捲動或拖移">
+    <p class="viewer-status" id="viewer-status" role="status">正在載入圖片…</p>
+    <div class="viewer-surface" id="viewer-surface" hidden><img id="ivImage" alt="手冊原尺寸圖片" draggable="false"></div>
+  </div>
+  <div class="viewer-help">使用 ＋／− 放大縮小；放大後可捲動查看，電腦可拖移圖片。</div>
+  <script>
+  (function () {
+    'use strict';
+    var params=new URLSearchParams(location.search),img=document.getElementById('ivImage'),viewport=document.getElementById('ivScroll'),surface=document.getElementById('viewer-surface'),status=document.getElementById('viewer-status'),percent=document.getElementById('viewer-percent');
+    var scale=1,rotation=params.get('rotate')==='1'?90:0,fitMode=true,loaded=false,drag=null;
+    function size(){return rotation%180?{w:img.naturalHeight,h:img.naturalWidth}:{w:img.naturalWidth,h:img.naturalHeight};}
+    function paint(){if(!loaded)return;var d=size(),w=img.naturalWidth*scale,h=img.naturalHeight*scale;surface.style.width=(d.w*scale)+'px';surface.style.height=(d.h*scale)+'px';img.style.width=w+'px';img.style.height=h+'px';img.style.transform=rotation===90?'translateX('+h+'px) rotate(90deg)':rotation===180?'translate('+w+'px,'+h+'px) rotate(180deg)':rotation===270?'translateY('+w+'px) rotate(270deg)':'none';percent.value=Math.round(scale*100)+'%';percent.textContent=percent.value;}
+    function fit(){if(!loaded)return;fitMode=true;scale=Math.min(1,Math.max(.02,(viewport.clientWidth-(innerWidth<768?16:24))/size().w));paint();viewport.scrollTop=0;viewport.scrollLeft=0;}
+    function setScale(next){if(!loaded)return;fitMode=false;var old=scale,cx=viewport.scrollLeft+viewport.clientWidth/2,cy=viewport.scrollTop+viewport.clientHeight/2;scale=Math.min(5,Math.max(.02,next));paint();viewport.scrollLeft=cx*scale/old-viewport.clientWidth/2;viewport.scrollTop=cy*scale/old-viewport.clientHeight/2;}
+    window.zoom=function(diff){setScale(scale+diff/100);};
+    window.illustPrint=function(){if(!loaded)return;var before=scale,wasFit=fitMode;scale=Math.min(1,740/size().w);paint();window.print();scale=before;fitMode=wasFit;paint();};
+    document.getElementById('btnFit').addEventListener('click',fit);document.getElementById('btnActual').addEventListener('click',function(){setScale(1);});document.getElementById('btnMinus').addEventListener('click',function(){setScale(scale/1.25);});document.getElementById('btnPlus').addEventListener('click',function(){setScale(scale*1.25);});document.getElementById('btnRotate').addEventListener('click',function(){rotation=(rotation+90)%360;if(fitMode)fit();else paint();});document.getElementById('btnPrint').addEventListener('click',window.illustPrint);
+    img.addEventListener('load',function(){loaded=true;surface.hidden=false;status.hidden=true;fit();if(params.get('illustPrint')==='true')setTimeout(window.illustPrint,100);});
+    img.addEventListener('error',function(){status.textContent='圖片尚未快取或無法載入，請連上網路後再試。';status.hidden=false;surface.hidden=true;});
+    try{var raw=params.get('src');if(!raw)throw new Error('missing');var source=new URL(raw,location.href);if(source.origin!==location.origin||!(/\.(webp|png|jpe?g|gif)$/i).test(source.pathname))throw new Error('invalid');img.src=source.href;}catch(_){status.textContent='沒有可顯示的圖片，請回到文章後重新開啟。';}
+    window.addEventListener('resize',function(){if(fitMode)fit();});
+    viewport.addEventListener('pointerdown',function(event){if(event.pointerType!=='mouse'||event.button!==0||!loaded)return;drag={x:event.clientX,y:event.clientY,left:viewport.scrollLeft,top:viewport.scrollTop};viewport.setPointerCapture(event.pointerId);viewport.classList.add('is-dragging');event.preventDefault();});
+    viewport.addEventListener('pointermove',function(event){if(!drag)return;viewport.scrollLeft=drag.left+drag.x-event.clientX;viewport.scrollTop=drag.top+drag.y-event.clientY;});
+    function endDrag(){drag=null;viewport.classList.remove('is-dragging');}viewport.addEventListener('pointerup',endDrag);viewport.addEventListener('pointercancel',endDrag);
+    document.addEventListener('keydown',function(event){if(event.key==='Escape'&&window.parent!==window){window.parent.postMessage({type:'manual-viewer-close'},location.origin);}else if(event.key==='+'||event.key==='='){setScale(scale*1.25);}else if(event.key==='-'){setScale(scale/1.25);}else if(event.key==='0'){setScale(1);}});
+  })();
+  </script>
+</body>
+</html>

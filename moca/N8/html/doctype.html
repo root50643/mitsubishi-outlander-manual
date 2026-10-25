@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="content-style-type" content="text/css">
+  <meta http-equiv="content-script-type" content="text/javascript">
+  <title>Mitsubishi Motors Service Manual</title>
+  <script type="text/javascript" src="../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/common.js"></script>
+  <link type="text/css" href="../css/common.css" rel="stylesheet">
+  <script type="text/javascript">
+    var initialvalue = "";
+    $(document).ready(function () {
+      initialvalue = $('select[name="doctype"]').val();
+    });
+    function opendoc() {
+      var value = $('select[name="doctype"]').val();
+      if (value != initialvalue) {
+        var parts = value.split(",");
+        var url = parts[0];
+        var hash = parts[1];
+        window.open(url, hash);
+        $('select[name="doctype"]').val(initialvalue);
+      }
+    }
+  </script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="../../../mobile.css">
+<script defer src="../../../mobile.js"></script>
+</head>
+<body>
+<div class="doctype">
+<div class="doctypesel"><div class="labelvalue"><div class="label">型式</div><div class="value"><form name="doctype_form"><select name="doctype" onchange="opendoc()"><option value="../../N5/index/index.html,336c3cae3d2691efce5e4a519a5c18ca">Workshop Manual</option><option value="../../N8/index/index.html,336c3cae3d2691efce5e4a519a5c18ca" selected>交車前檢查與定期保養</option></select></form></div></div></div>
+<div class="modelyear"><div class="labelvalue"><div class="label">年度</div><div class="value">25-26MY</div></div></div>
+</div>
+</body>
+</html>

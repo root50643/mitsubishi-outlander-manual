@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-style-type" content="text/css">
+    <meta http-equiv="content-script-type" content="text/javascript">
+    <link type="text/css" href="../css/common.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../js/search.js"></script>
+    <script type="text/javascript">
+        function enter() {
+            if (window.event.keyCode == 13) {
+                search();
+            }
+        }
+        function clearTitle() {
+            //$("#searchByTitle").val("");
+        }
+        function clearText() {
+            //$("#searchByText").val("");
+        }
+    </script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="../../../mobile.css">
+<script defer src="../../../mobile.js"></script>
+</head>
+<body class="searchBoxBody moca">
+    <div class="searchBox">
+        <div class="searchInput">
+            <div>標題搜尋</div>
+            <div><input id="searchByTitle" value="" type="text" onkeypress="clearText(); enter();"></div>
+            <div>內文搜尋</div>
+            <div><input id="searchByText" value="" type="text" onkeypress="clearTitle(); enter();"></div>
+        </div>
+        <div class="searchButton">
+            <button class="search" type="submit" onclick="search();"></button>
+        </div>
+    </div>
+    <div class="errorMessage"><div>因資料組合不正確，無法搜尋。</div><div>可搜尋的組合如下：</div><div>-標題</div><div>-內文</div></div>
+</body>
+</html>

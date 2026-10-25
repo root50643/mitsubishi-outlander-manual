@@ -1,0 +1,141 @@
+/* Shared responsive layer. Original manual files remain unchanged. */
+:root {
+  --manual-red: #b9002b;
+  --manual-ink: #202429;
+  --manual-border: #d6dade;
+  --manual-bar: 54px;
+}
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { color: var(--manual-ink); }
+button, input, select, textarea { font-family: inherit; }
+:focus-visible { outline: 3px solid #006bb5; outline-offset: 2px; }
+.indexFrame { height: 100vh; height: 100dvh; min-height: 0; }
+.indexFrame .headersFrame, .indexFrame .footerFrame { flex: 0 0 auto; }
+.indexFrame .headerFrame { display: none; }
+.indexFrame .mainFrame, .indexFrame .contentFrame,
+.indexFrame .mainLeftFrame, .indexFrame .outlineFrame { min-width: 0; min-height: 0; }
+.indexFrame .mainFrame { flex: 1 1 0; overflow: hidden; position: relative; }
+.indexFrame .contentFrame, .indexFrame .outlineFrame { overflow: hidden; }
+.indexFrame .contentFrame iframe, .indexFrame .outlineFrame iframe { display: block; }
+.indexFrame .doctypeFrame { height: 78px; flex: 0 0 auto; }
+.manual-toolbar {
+  display: flex; align-items: center; gap: 12px; flex: 0 0 auto;
+  min-height: var(--manual-bar); padding: 4px 16px;
+  padding-top: max(4px, env(safe-area-inset-top));
+  border-top: 3px solid var(--manual-red); border-bottom: 1px solid var(--manual-border);
+  background: #fff; position: relative; z-index: 20;
+}
+.manual-title { display: flex; align-items: center; gap: 9px; flex: 1 1 auto; min-width: 0; font-size: 17px; font-weight: 700; line-height: 1.25; }
+.manual-title img { flex: 0 0 auto; width: 26px; height: 30px; object-fit: contain; }
+.manual-title span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.manual-secondary, .pwa-controls { display: flex; gap: 6px; align-items: center; flex: 0 0 auto; }
+.manual-button, .manual-toolbar button, .manual-drawer-head button,
+.manual-drawer-actions button, .manual-image-head button {
+  min-height: 44px; min-width: 44px; display: inline-flex; align-items: center; justify-content: center;
+  padding: 8px 12px; border: 1px solid #cbd0d4; border-radius: 6px;
+  background: #fff; color: #252a30; font: inherit; font-size: 14px;
+  line-height: 1.25; cursor: pointer; text-decoration: none;
+}
+.manual-button:hover, .manual-toolbar button:hover, .manual-drawer-head button:hover,
+.manual-drawer-actions button:hover, .manual-image-head button:hover { background: #f0f2f4; }
+#manual-menu-toggle, .manual-drawer-head, .manual-drawer-actions, .manual-drawer-mask { display: none; }
+.manual-image-dialog { border: 0; padding: 0; width: 100vw; height: 100vh; height: 100dvh; max-width: none; max-height: none; margin: 0; background: #fff; color: var(--manual-ink); }
+.manual-image-dialog[open] { display: flex; flex-direction: column; }
+.manual-image-dialog::backdrop { background: rgba(17,22,27,.65); }
+.manual-image-head { display: flex; flex: 0 0 auto; gap: 12px; justify-content: space-between; align-items: center; min-height: 54px; padding: 4px 12px; padding-top: max(4px,env(safe-area-inset-top)); border-bottom: 1px solid var(--manual-border); background: #fff; }
+.manual-image-head strong { font-size: 15px; }
+.manual-image-dialog iframe { flex: 1 1 0; min-height: 0; width: 100%; border: 0; }
+.manual-viewer-open { overflow: hidden !important; }
+.manual-table-scroll { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; margin-bottom: 12px; }
+.manual-table-scroll > table { margin-bottom: 0; }
+.manual-zoomable { cursor: zoom-in; }
+.manual-content-page .sieBookmarkWrapper { display: inline-block; padding-right: 6px; }
+.manual-content-page .siePrint, .manual-content-page .sieBookmark { min-height: 30px; min-width: 44px; }
+.manual-content-page .siePrintWrapper { border-left: 0; padding-left: 0; }
+.manual-content-page .servinfo { min-width: 0; }
+.manual-content-page .servinfo img { max-width: 100%; height: auto; }
+.manual-content-page .prevsie a, .manual-content-page .nextsie a { min-height: 44px; height: 44px; }
+.manual-content-page .prevsie, .manual-content-page .nextsie { min-height: 44px; height: 44px; }
+.manual-outline-page #outline a, .manual-outline-page #outline li > span { min-height: 32px; line-height: 1.45; padding-top: 6px; padding-bottom: 6px; }
+.manual-outline-page #outline li { padding-top: 0; padding-bottom: 0; }
+/* Search clears inline display values when opening ancestors; the original
+   #outline ul ul { display:none } still wins unless opened nodes are explicit. */
+.manual-outline-page #outline li.opened > ul { display: block; }
+.manual-content-page .pathlist { overflow-wrap: anywhere; }
+.manual-content-page .sieHeader { padding-right: env(safe-area-inset-right); padding-left: env(safe-area-inset-left); }
+.manual-content-page .sieCommandBar { height: 38px; padding-top: 4px; padding-bottom: 4px; }
+.manual-content-page .balloon > button { min-width: 32px; min-height: 32px; }
+.manual-root-link { display: inline-flex; margin: 8px 12px; align-items: center; min-height: 44px; color: #005c9f; }
+@media (max-width: 767px) {
+  .manual-toolbar { gap: 7px; padding-left: max(8px,env(safe-area-inset-left)); padding-right: max(8px,env(safe-area-inset-right)); }
+  .manual-title { font-size: 14px; gap: 5px; }
+  .manual-title img { width: 20px; height: 25px; }
+  .manual-title span { white-space: normal; max-width: 7em; }
+  .manual-secondary { display: none; }
+  #manual-menu-toggle { display: inline-flex; flex: 0 0 auto; padding-left: 9px; padding-right: 9px; font-size: 13px; border-color: #b9002b; color: #a40026; }
+  .manual-toolbar .pwa-controls button { font-size: 12px; max-width: 100px; padding-left: 8px; padding-right: 8px; }
+  .indexFrame .subHeaderFrame { height: 38px; }
+  .indexFrame .mainLeftFrame {
+    position: fixed; z-index: 10020; left: 0; top: 0; bottom: 0;
+    width: min(92vw,420px) !important; min-width: 0 !important;
+    padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom);
+    background: #f2f2f2; box-shadow: 4px 0 24px rgba(0,0,0,.2);
+    transform: translateX(-105%); visibility: hidden; transition: transform .18s ease, visibility .18s;
+  }
+  .indexFrame.manual-menu-open .mainLeftFrame { transform: none; visibility: visible; }
+  .manual-drawer-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 10px 6px 14px; background: #fff; border-bottom: 1px solid var(--manual-border); flex: 0 0 auto; }
+  .manual-drawer-head strong { font-size: 17px; }
+  .manual-drawer-actions { display: flex; gap: 8px; padding: 6px 12px; flex: 0 0 auto; }
+  .manual-drawer-actions button { flex: 1 1 auto; font-size: 13px; }
+  .manual-drawer-mask { position: fixed; inset: 0; z-index: 10010; background: rgba(13,19,25,.48); border: 0; }
+  .manual-menu-open .manual-drawer-mask { display: block; }
+  .indexFrame .splitter { display: none; }
+  .indexFrame .contentFrame { width: 100%; flex: 1 1 100%; }
+  .indexFrame .outlineFrame { margin-left: 0; }
+  .indexFrame .doctypeFrame { height: 72px; flex: 0 0 auto; }
+  .indexFrame .footerFrame { height: max(17px,env(safe-area-inset-bottom)); }
+  .moca-search-input, .moca-search-submit { min-height: 44px; height: 44px; font-size: 16px; }
+  .moca-search-suggestion { min-height: 44px; font-size: 15px; }
+  .moca-search-suggestions { max-height: min(50vh,360px); }
+  .moca-search-results { z-index: 100100; }
+  .moca-search-results__panel { inset: max(8px,env(safe-area-inset-top)) 8px max(8px,env(safe-area-inset-bottom)); width: auto; max-height: none; margin: 0; }
+  .moca-search-results__close { min-height: 44px; min-width: 44px; }
+  .indexFrame:not(.manual-menu-open) .moca-search-suggestions,
+  .indexFrame:not(.manual-menu-open) .moca-search-results { display: none !important; }
+  .subHeaderInternal { display: flex; align-items: center; gap: 8px; padding-left: 10px; padding-right: 8px; height: 100%; line-height: 1.2; }
+  .subHeaderInternal .vTypeLabel { font-size: 13px; padding-right: 0; white-space: nowrap; }
+  .subHeaderInternal .pubDateLabel { font-size: 12px; min-width: 0; }
+  .subHeaderInternal .vTypeLabel::before, .subHeaderInternal .pubDateLabel::before { display: none; }
+  .doctype select { max-width: 100%; min-height: 40px; font-size: 15px; }
+  .doctype .labelvalue { font-size: 13px; padding-left: 10px; }
+  .manual-outline-page #outline { display: block; width: 100%; font-size: 15px; padding: 4px 8px 20px; }
+  .manual-outline-page #outline li, .manual-outline-page #outline a, .manual-outline-page #outline li > span { white-space: normal; overflow-wrap: anywhere; }
+  .manual-outline-page #outline a, .manual-outline-page #outline li > span { min-height: 44px; line-height: 1.45; padding-top: 10px; padding-bottom: 10px; }
+  .manual-outline-page #outline ul ul { margin-left: 0; }
+  .manual-outline-page #outline li { margin-left: 3px; }
+  .manual-content-page { font-size: 16px !important; overflow-wrap: anywhere; }
+  .manual-content-page .servinfo { padding-left: max(12px,env(safe-area-inset-left)); padding-right: max(12px,env(safe-area-inset-right)); line-height: 1.65; }
+  .manual-content-page .servinfo > .title { font-size: 20px; line-height: 1.45; padding: 8px 10px; }
+  .manual-content-page .pathlist { padding: 6px 12px 8px; font-size: 12px; line-height: 1.5; }
+  .manual-content-page .sieCommandBar { height: 48px; padding-top: 3px; padding-bottom: 3px; }
+  .manual-content-page .siePrint, .manual-content-page .sieBookmark { min-height: 44px; min-width: 44px; }
+  .manual-content-page #btnLinkBack { min-height: 44px; font-size: 12px; line-height: 1.4; max-width: calc(100% - 112px); padding: 4px 8px; }
+  .manual-content-page .manual-wide-table { min-width: 560px; }
+  .manual-content-page .manual-table-scroll td, .manual-content-page .manual-table-scroll th { overflow-wrap: normal; }
+  .manual-content-page .servinfo .diagnostic .diagnostic { padding-left: .75em; padding-right: .25em; }
+  .manual-content-page .servinfo .list1, .manual-content-page .servinfo .list2,
+  .manual-content-page .servinfo .list3, .manual-content-page .servinfo .list4 { padding-left: 1.3em; }
+  .bookmarkBody { padding: 10px !important; font-size: 15px; overflow-x: auto; }
+  .bookmarkBody .tableBookmark { min-width: 600px; }
+  .topBody { padding: 12px !important; line-height: 1.65; }
+  .topBody img.top-logo { max-width: 100%; margin-left: 0; }
+  .topBody .top-usage { margin-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .indexFrame .mainLeftFrame { transition: none; } }
+@media print {
+  .manual-toolbar, .manual-drawer-head, .manual-drawer-actions, .manual-drawer-mask, .manual-root-link { display: none !important; }
+  .manual-table-scroll { overflow: visible !important; max-width: none !important; }
+  .manual-content-page .manual-wide-table { min-width: 0; }
+  .manual-content-page .servinfo { padding: 0 !important; }
+  .manual-content-page .sieHeader { display: none !important; }
+}

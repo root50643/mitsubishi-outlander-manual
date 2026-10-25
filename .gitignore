@@ -1,0 +1,20 @@
+# Local secrets and environment files
+.env
+.env.*
+!.env.example
+*.pem
+*.pfx
+*.key
+# Local logs, archives, and caches
+*.log
+*.zip
+.cache/
+__pycache__/
+*.py[cod]
+# Operating system and editor temporary files
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~

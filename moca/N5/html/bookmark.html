@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-style-type" content="text/css">
+    <meta http-equiv="content-script-type" content="text/javascript">
+    <link type="text/css" href="../css/common.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            loadBookmarks();
+        });
+        function loadBookmarks() {
+            var bm = getBookmarks();
+            if (bm && bm.length > 0) {
+                $(".error").hide();
+                var tbody = $(".tableBookmark > tbody");
+                tbody.empty();
+
+                var deleteLabel = $(".deleteButton").text();
+
+                for (var i = 0; i < bm.length; i++) {
+                    var b = bm[i];
+                    var tr = $("<tr></tr>");
+
+                    var td1 = $('<td class="dataSetDate">' + b.setDate + '</td>');
+                    var td2 = $('<td class="dataCarSeries">' + escape(b.vehicleName) + '</td>');
+                    var td3 = $('<td class="dataVehicleInfo">' + escape(b.manualName) + '</td>');
+                    var td4 = $('<td class="dataGroupInfo">' + escape(b.groupName) + '</td>');
+                    var td5 = $('<td class="dataSie"><a href="#" onclick="openBookmarkSIE(' + "'" + b.url + "');" + '">' + escape(b.sieTitle) + '</a></td>');
+                    var td6 = $('<td class="dataDelete"><button class="delete" onclick="deleteThisBookmark(' + "'" + b.bookmarkId + "'" + ')" type="button">' + deleteLabel + '</button></td>');
+
+                    tr.append(td1);
+                    tr.append(td2);
+                    tr.append(td3);
+                    tr.append(td4);
+                    tr.append(td5);
+                    tr.append(td6);
+                    tbody.append(tr);
+                }
+                $(".tableBookmark").css("display", "table");
+            }
+            else {
+                $(".tableBookmark").hide();
+                $(".error").show();
+            }
+        }
+        function deleteThisBookmark(bookmarkId) {
+            var msg = $(".confirm").text();
+            if (confirm(msg)) {
+                deleteBookmarkCookie(bookmarkId);
+                loadBookmarks();
+            }
+        }
+        function openBookmarkSIE(url) {
+            window.open(url, "_bookmark", 'width=820,height=699,toolbar=no,menubar=no,scrollbars=yes,resizable=yes');
+            window.close();
+        }
+        function escape(text) {
+            return $("<span/>").text(text).html();
+        }
+    </script>
+    <style type="text/css">
+        html, body {
+            background-color: #fafafa;
+        }
+    </style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="../../../mobile.css">
+<script defer src="../../../mobile.js"></script>
+</head>
+<body class="bookmarkBody">
+    <div class="bookMarkTitle">書籤清單</div>
+    <div class="error">無書籤</div>
+    <div class="confirm">是否要刪除書籤？</div>
+    <div class="deleteButton">刪除</div>
+    <table class="tableBookmark" id="tableBookmark" border="1" cellspacing="0" cellpadding="0">
+        <thead>
+            <tr>
+                <th class="dataSetDate">日期</th>
+                <th class="dataCarSeries">車型</th>
+                <th class="dataVehicleAndGroupInfo" colspan="2">文件</th>
+                <th class="dataSie">標題</th>
+                <th class="dataDelete">刪除</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</body>
+</html>

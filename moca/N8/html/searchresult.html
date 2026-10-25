@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-style-type" content="text/css">
+    <meta http-equiv="content-script-type" content="text/javascript">
+    <link type="text/css" href="../css/common.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../search/searchindex.js"></script>
+    <script type="text/javascript" src="../js/search.js"></script>
+    <link type="text/css" href="../css/common.css" rel="stylesheet">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            searchLoaded();
+        });
+    </script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="../../../mobile.css">
+<script defer src="../../../mobile.js"></script>
+</head>
+<body class="searchBody moca">
+    <div class="searchCondition">
+        <div class="searchTitleLabel">搜尋結果</div>
+        <div class="searchText">
+            <span class="searchTextLabel">文字：</span>
+            <span class="searchTextValue"></span>
+        </div>
+    </div>
+    <div class="loaderWrap"><div class="loader"> </div></div>
+    <div id="main"></div>
+    <div class="noResultText">
+        <div>找不到標題。</div><div>請重新設定搜尋條件。</div>
+    </div>
+</body>
+</html>

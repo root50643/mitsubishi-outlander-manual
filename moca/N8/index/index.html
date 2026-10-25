@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    
+    <meta http-equiv="content-style-type" content="text/css" />
+    <meta http-equiv="content-script-type" content="text/javascript" />
+    <link type="text/css" href="../css/common.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../search-ui.css?v=4.0.5" />
+    <title>三菱汽車服務手冊</title>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-resizable.min.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript">window.MOCA_SEARCH_SECTION = 'N8';</script>
+    <script type="text/javascript" src="../../search_data_N8.js?v=4.0.5"></script>
+    <script type="text/javascript" src="../../search/SearchNormalizer.js?v=4.0.5"></script>
+    <script type="text/javascript" src="../../search/SynonymDictionary.js?v=4.0.5"></script>
+    <script type="text/javascript" src="../../search/HighlightRenderer.js?v=4.0.5"></script>
+    <script type="text/javascript" src="../../search/SearchRanking.js?v=4.0.5"></script>
+    <script type="text/javascript" src="../../search/SearchIndex.js?v=4.0.5"></script>
+    <script type="text/javascript" src="../../search/SearchHistory.js?v=4.0.5"></script>
+    <script type="text/javascript" src="../../search/SearchSuggestion.js?v=4.0.5"></script>
+    <script type="text/javascript" src="../../search/SearchEngine.js?v=4.0.5"></script>
+    <script type="text/javascript" src="../../search-ui.js?v=4.0.5"></script>
+    <script type="text/javascript">
+        window.linkHistory = [];
+        $(function () {
+            $(".mainLeftFrame").resizable({
+                handleSelector: ".splitter",
+                resizeHeight: false
+            });
+        });
+    </script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="../../../mobile.css">
+<script defer src="../../../mobile.js"></script>
+<link rel="manifest" href="../../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../../icons/apple-touch-icon.png">
+<meta name="theme-color" content="#a62027">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script defer src="../../../pwa.js"></script>
+</head>
+<body class="indexFrame moca">
+    <div class="headersFrame">
+        <div class="headerFrame">
+            <iframe name="header" src="../html/header.html"></iframe>
+        </div>
+        <div class="subHeaderFrame">
+            <iframe name="subheader" src="../html/subheader.html"></iframe>
+        </div>
+    </div>
+    <div class="mainFrame">
+      <div class="mainLeftFrame">
+        <div class="doctypeFrame">
+          <iframe name="doctype" src="../html/doctype.html"></iframe>
+        </div>
+        <div id="moca-search-host" class="moca-search-host"></div>
+        <div class="outlineFrame">
+          <iframe name="outline" src="../html/outline.html"></iframe>
+        </div>
+      </div>
+        <div class="splitter">
+        </div>
+        <div class="contentFrame">
+            <iframe id="content" name="content" src="../html/top.html"></iframe>
+        </div>
+    </div>
+    <div class="footerFrame">
+        <iframe src="../html/footer.html"></iframe>
+    </div>
+</body>
+</html>
