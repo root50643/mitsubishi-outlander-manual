@@ -11,7 +11,11 @@ Responsive static website for the N5 workshop manual and N8 pre-delivery inspect
 
 The 11,190 converted illustrations total **422,052,160 bytes**. The website export, before these repository metadata files, totals **533,748,156 bytes**.
 
-This repository is private. **GitHub Pages is not enabled.** Private repository visibility does not make a GitHub Pages website private.
+This repository and its GitHub Pages website are public.
+
+**Open the website:** <https://root50643.github.io/mitsubishi-outlander-manual/>
+
+GitHub Pages publishes the root directory of the `main` branch over HTTPS.
 
 ## Local preview
 
